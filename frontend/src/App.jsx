@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { extractTextFromImage, terminateWorker } from './services/ocr'
 
+const SAMPLE_MESSAGES = {
+  high: "PREMIUM VIP TRADING GROUP\n\n100% GUARANTEED PROFIT\nEarn ₹5000 daily with Nifty options.\n\nPay ₹2000 via UPI:\nscammer@upi\n\nOnly 2 spots left!\nJoin now before the offer expires!",
+  suspicious: "Exclusive market tips available.\nPay ₹999 via UPI to receive premium investment calls.\nOnly 2 seats left this week.",
+  low: "Reminder: Market investments involve risk.\nPast performance does not guarantee future returns.\nPlease verify your broker and investment information through official sources."
+};
+
 function App() {
   const [mode, setMode] = useState('paste') // 'paste' or 'upload'
   const [lang, setLang] = useState('english')
@@ -112,6 +118,12 @@ function App() {
     setErrorMsg('');
   }
 
+  const loadSample = (type) => {
+    setMode('paste');
+    setText(SAMPLE_MESSAGES[type]);
+    setErrorMsg('');
+  };
+
   return (
     <div className="container">
       <header className="header">
@@ -149,7 +161,36 @@ function App() {
                   onChange={(e) => setText(e.target.value)}
                   rows={8}
                 />
+                
+                <div className="sample-section" style={{ marginBottom: '15px' }}>
+                  <p style={{ margin: '0 0 8px 0', fontSize: '0.9em', color: '#555', fontWeight: 'bold' }}>Try a sample</p>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                    <button 
+                      className="sample-btn"
+                      style={{ padding: '8px 12px', fontSize: '0.85em', backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '4px', cursor: 'pointer', flex: '1', minWidth: '80px', color: '#333' }}
+                      onClick={() => loadSample('high')}
+                    >
+                      HIGH Risk
+                    </button>
+                    <button 
+                      className="sample-btn"
+                      style={{ padding: '8px 12px', fontSize: '0.85em', backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '4px', cursor: 'pointer', flex: '1', minWidth: '80px', color: '#333' }}
+                      onClick={() => loadSample('suspicious')}
+                    >
+                      SUSPICIOUS
+                    </button>
+                    <button 
+                      className="sample-btn"
+                      style={{ padding: '8px 12px', fontSize: '0.85em', backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '4px', cursor: 'pointer', flex: '1', minWidth: '80px', color: '#333' }}
+                      onClick={() => loadSample('low')}
+                    >
+                      LOW Risk
+                    </button>
+                  </div>
+                </div>
+
                 <button className="analyze-btn" onClick={handleAnalyze}>
+
                   Analyze
                 </button>
               </div>
