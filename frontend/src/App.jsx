@@ -130,6 +130,10 @@ function App() {
         <h1>SachiBaat</h1>
         <p className="subtitle">Investor Protection</p>
         <p className="explanation">Check if a financial message or screenshot is safe.</p>
+        <div className="privacy-top-banner" style={{ backgroundColor: '#e0f2fe', color: '#0369a1', padding: '10px', fontSize: '13px', textAlign: 'center', borderBottom: '1px solid #bae6fd', width: '100%', boxSizing: 'border-box', fontWeight: '500' }}>
+  🔒 <strong>Privacy Assurance:</strong> Uploaded content is processed locally and is not stored after analysis.
+</div>
+
       </header>
 
       <main className="main-content">
@@ -349,6 +353,16 @@ function App() {
                     <li key={i}>{a}</li>
                   ))}
                 </ul>
+                {/* Checklist Requirement: 1930 / Cybercrime Emergency Reporting Guidance */}
+<div className="cybercrime-action-alert" style={{ background: '#fff5f5', border: '1px solid #feb2b2', padding: '14px', borderRadius: '8px', marginTop: '16px', textAlign: 'left' }}>
+  <h5 style={{ margin: '0 0 6px 0', fontSize: '14px', color: '#991b1b', fontWeight: 'bold' }}>
+    📞 National Cyber Crime Helpline (1930) / Report Financial Fraud
+  </h5>
+  <p style={{ margin: '0 0 10px 0', fontSize: '13px', color: '#475569', lineHeight: '1.4' }}>
+    If you have been a victim of financial fraud or an online scam, immediately dial the National Helpline at <strong style={{ color: '#ef4444', fontSize: '15px' }}>1930</strong> or file an official report online at the government portal: <a href="https://cybercrime.gov.in" target="_blank" rel="noreferrer" style={{ color: '#2563eb', fontWeight: 'bold', textDecoration: 'underline' }}>cybercrime.gov.in</a>.
+  </p>
+</div>
+
               </div>
             )}
 
