@@ -9,7 +9,7 @@ const rules = [
       if (ignorePattern.test(lower)) {
         return false;
       }
-      return /(guaranteed.*?(profit|return|income|\d+%|monthly|daily|tips|trading)|sure return|100%\s*risk[-\s]*free|100%\s*guarantee|fixed return|fix return|zero risk|bina\s*(kisi\s*)?risk|pakka munafa|paisa double)/i.test(lower);
+      return /(guaranteed.*?(profit|return|income|\d+%|monthly|daily|tips|trading)|sure return|100%\s*risk[-\s]*free|100%\s*guarantee|fixed return|fix return|zero risk|bina\s*(kisi\s*)?risk|pakka munafa|paisa double|guaranteed kamai|ghar baithe kamai|jaldi paisa)/i.test(lower);
     },
     severity: "CRITICAL",
     explanation: "The message promises guaranteed profits. In real stock markets, returns can never be legally guaranteed."
@@ -20,7 +20,7 @@ const rules = [
     condition: (normalizedText) => {
       const lower = normalizedText.toLowerCase();
       if (lower.includes("upi mandate") || lower.includes("zerodha") || lower.includes("upstox") || lower.includes("groww") || lower.includes("angelone")) {
-         return false;
+        return false;
       }
       const paymentWords = /(upi|gpay|phonepe|paytm|crypto|wallet)/i.test(lower);
       const investmentWords = /(fee|premium|join|group|channel|trade|trading|invest|tips|tip|calls|advisory)/i.test(lower);
@@ -49,7 +49,7 @@ const rules = [
     condition: (normalizedText) => {
       const lower = normalizedText.toLowerCase();
       if (lower.includes("ipo closing") || lower.includes("ipo allotment")) {
-          return false;
+        return false;
       }
       return /(limited time|offer ends today|only \d+ (spots|seats)( left)?|act now|hurry|last chance|spots left|seats left)/i.test(lower);
     },
@@ -67,6 +67,41 @@ const rules = [
     },
     severity: "MEDIUM",
     explanation: "SEBI-registered advisors rarely solicit investments through random WhatsApp or Telegram messages."
+  },
+  {
+    id: "R006",
+    category: "KYC Scam",
+    condition: (normalizedText) => {
+      const lower = normalizedText.toLowerCase();
+
+      return /(update kyc immediately|kyc expired|complete kyc now|account suspended|demat account.*blocked|pan verification pending)/i.test(lower);
+    },
+    severity: "HIGH",
+    explanation: "Scammers often create panic by claiming your account or KYC needs urgent action."
+  },
+
+  {
+    id: "R007",
+    category: "Fake IPO Allotment",
+    condition: (normalizedText) => {
+      const lower = normalizedText.toLowerCase();
+
+      return /(guaranteed ipo allotment|assured ipo allotment|reserve ipo shares now|pay.*ipo allotment)/i.test(lower);
+    },
+    severity: "HIGH",
+    explanation: "No one can legally guarantee IPO allotment in advance."
+  },
+
+  {
+    id: "R008",
+    category: "Fake SEBI Claims",
+    condition: (normalizedText) => {
+      const lower = normalizedText.toLowerCase();
+
+      return /(sebi.*(guaranteed returns|profit|tips)|official sebi trading group|sebi approved|sebi certified)/i.test(lower);
+    },
+    severity: "HIGH",
+    explanation: "Fraudsters often misuse SEBI's name to appear trustworthy."
   }
 ];
 
