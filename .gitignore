@@ -13,3 +13,14 @@ dist-ssr/
 # Logs
 *.log
 npm-debug.log*
+
+# Internal development/audit documents
+backend/red_team_audit_report.md
+diagnosis_report.md
+final_audit_report.md
+final_report.md
+hardening_report.md
+SANGYAN_Research_Report.md
+SANGYAN_Judge_Review.md
+SACHIBAAT_MVP_SPEC.md
+AGENTS.md
